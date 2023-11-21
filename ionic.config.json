@@ -1,0 +1,7 @@
+{
+  "name": "TaskNest",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
