@@ -1,0 +1,27 @@
+.item-header{
+    --padding-top: 30px;
+
+    ion-label{
+        font-size: 25px;
+        font-weight: bold;
+    }
+}
+
+ion-range {
+    --bar-background: rgba(170, 250, 183, 0.353);
+    --bar-background-active: #00c83c;
+    --bar-height: 8px;
+    --bar-border-radius: 8px;
+    --knob-background: #2500c8;
+    --knob-size: 40px;
+    --pin-background: #e90056;
+    --pin-color: #00fbff;
+  }
+
+  item-reorder{
+    --min-height: 32px;
+  }
+
+ion-footer{
+  background: var(--ion-color-light);
+}

@@ -68,12 +68,12 @@ private utilsSvc: UtilsService
         this.utilsSvc.dismissLoading();
       //Mensage de bienbenida
         this.utilsSvc.presentToast({
-          message: 'Bienbenido ${user.name}',
+          message: `¡Bienvenido ${user.name}!`,
           duration: 1500,
           color: 'primary',
           icon: 'person-outline'
         })
-         
+        this.form.reset()
       }, error =>{
 
         this.utilsSvc.dismissLoading();

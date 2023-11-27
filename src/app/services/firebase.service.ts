@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { User } from '../models/user.model';
 import { getAuth, updateProfile } from "firebase/auth";
+import { UtilsService } from './utils.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +12,11 @@ export class FirebaseService {
 
   constructor(
     private auth: AngularFireAuth,
-    private db: AngularFirestore
+    private db: AngularFirestore,
+    private utilsSvc: UtilsService
   ) { }
 
-  //auteticacion
+  //auteticacion de usuario
   login (user: User){
     return this.auth.signInWithEmailAndPassword(user.email, user.password)
   }
@@ -26,4 +28,30 @@ export class FirebaseService {
     const auth = getAuth();
     return updateProfile(auth.currentUser, user)
   }
+  //Estado de la cuenta, si el usuario a iniciado sesion o no.(guards)
+  getAutState(){
+    return this.auth.authState
+  }
+  //cerrar sesion
+  async singOut(){
+    await this.auth.signOut();
+     this.utilsSvc.routerLink('/auth');
+     localStorage.removeItem('user');
+  }
+  ///Agregar tareas a la base de datos///
+   getSubcollection(path: string, subcollectionName: string){
+    return this.db.doc(path).collection(subcollectionName).valueChanges({ idField: 'id' })
+   }
+
+   addSubcollection(path: string, subcollectionName: string, object: any){
+    return this.db.doc(path).collection(subcollectionName).add(object)
+   }
+
+   updateDocument(path: string, object: any){
+    return this.db.doc(path).update(object);
+   }
+
+   deleteDocument(path: string){
+    return this.db.doc(path).delete
+   }
 }
